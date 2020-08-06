@@ -43,6 +43,7 @@ class Solution:
   # Use hash map with one loop
   def twoSumHash2(self, nums: List[int], target: int):
     map = {}
+    # each loop, look back to map and check if the complement match, return the value
     for i in range(len(nums)):
       complement = target - nums[i]
       
