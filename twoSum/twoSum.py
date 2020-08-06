@@ -45,14 +45,17 @@ class Solution:
     map = {}
     # each loop, look back to map and check if the complement match, return the value
     for i in range(len(nums)):
-      complement = target - nums[i]
-      
-      if complement in map:
-        return [ map.get(complement), i]
-      
-      map[nums[i]] = i
+        map = {}
+        for i in range(len(nums)):
+            num = nums[i]
+            complement = target - num
 
-    return []
+            if complement in map:
+                return [ map.get(complement), i]
+
+            map[num] = i
+
+        return []
 
 
 
