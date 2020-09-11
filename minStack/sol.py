@@ -40,27 +40,27 @@ class MinStack:
         """
         initialize your data structure here.
         """
-        self.stack = []
-        self.minStack = []
+        self.stack = Stack()
+        self.minStack = Stack()
 
     def push(self, x: int) -> None:
-        self.stack.append(x)
-        if len(self.minStack) == 0 or self.minStack[-1] >= x:
-          self.minStack.append(x)
+        self.stack.push(x)
+        if self.minStack.length() == 0 or self.minStack.top() >= x:
+          self.minStack.push(x)
 
     def pop(self) -> None:
-      if len(self.stack) > 0:
+      if self.stack.length() > 0:
         lastItem = self.stack.pop()
-        if lastItem == self.minStack[-1]:
+        if lastItem == self.minStack.top():
           self.minStack.pop()
 
     def top(self) -> int:
-      if len(self.stack) > 0:
-        return self.stack[-1]
+      if self.stack.length() > 0:
+        return self.stack.top()
 
     def getMin(self) -> int:
-      if len(self.stack) > 0:
-        return self.minStack[-1]
+      if self.minStack.length() > 0:
+        return self.minStack.top()
 
 
 # Your MinStack object will be instantiated and called as such:
@@ -69,3 +69,24 @@ class MinStack:
 # obj.pop()
 # param_3 = obj.top()
 # param_4 = obj.getMin()
+
+class Stack:
+  def __init__(self):
+    self.storage = {}
+    self.size = 0
+  
+  def push(self, val):
+    self.storage[self.size] = val
+    self.size += 1
+
+  def pop(self):
+    top = self.storage[self.size - 1]
+    del self.storage[self.size - 1]
+    self.size -= 1
+    return top
+  
+  def top(self):
+    return self.storage[self.size - 1]
+
+  def length(self):
+    return self.size
