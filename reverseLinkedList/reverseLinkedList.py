@@ -18,14 +18,27 @@ class ListNode:
         self.val = val
         self.next = next
 class Solution:
+    # def reverseList(self, head: ListNode) -> ListNode:
+    #     prev = None
+    #     current = head
+    #     while (current != None):
+    #         nextTemp = current.next
+    #         current.next = prev
+    #         prev = current
+    #         current = nextTemp
+        
+    #     return prev
+    
+    # recursive aproach
     def reverseList(self, head: ListNode) -> ListNode:
-        prev = None
-        current = head
-        while (current != None):
-            nextTemp = current.next
-            current.next = prev
-            prev = current
-            current = nextTemp
+        if head == None:
+            return
+        elif head.next == None:
+            return head
         
-        return prev
-        
+        reversed = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+
+        return reversed
+    
